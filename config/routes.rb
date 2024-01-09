@@ -3,6 +3,11 @@ Rails.application.routes.draw do
     sessions: 'admin/sessions'
   }
 
+  namespace :admin do
+    get 'dashboards', to: 'dashboards#index'
+    resources :users, only: [:destroy]
+  end
+
   root to: 'homes#top'
 
   devise_for :users
