@@ -1,9 +1,13 @@
-<h1>全ユーザー一覧</h1>
-<ul>
+<div class="card-list-container py-5">
+<h2 class="text-center">全ユーザー一覧</h2>
+  <div class="card w-50 mx-auto mt-4 shadow-lg">
+  <ul>
   <% @users.each do |user| %>
     <li>
       <%= user.name %> - <%= user.email %>
       <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } %>
     </li>
   <% end %>
-</ul>
+  </ul>
+  </div>
+</div>

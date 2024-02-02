@@ -1,21 +1,18 @@
 # frozen_string_literal: true
 
 class Admin::SessionsController < Devise::SessionsController
-   layout 'admin'
+  before_action :configure_sign_in_params, only: [:create], if: :devise_controller?
+  layout 'admin'
 
-
-  protected
 
   def after_sign_in_path_for(resource)
     admin_dashboards_path
   end
 
-  def after_sign_out_path_for(resource_or_scope)
-    new_admin_session_path
+  def after_sign_out_path_for(resource)
+    admin_session_path
   end
 
-
-  # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -32,10 +29,10 @@ class Admin::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
+  def configure_sign_in_params
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:email])
+  end
 end

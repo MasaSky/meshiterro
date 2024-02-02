@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  devise_for :users,skip: [:passwords], controllers: {registrations: 'public/registrations', sessions: 'public/sessions'}
   devise_for :admin, skip: [:registrations, :password], controllers: {
     sessions: 'admin/sessions'
   }
@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-    devise_for :users
     root to: 'homes#top'
     get 'homes/about', to: 'homes#about', as: :about
     resources :post_images, only: [:new, :create, :index, :show, :destroy] do
